@@ -17,13 +17,10 @@
         </v-btn>
       </v-list-item>
 
-      <v-list-item
-        avatar
-        tag="div"
-      >
-        <v-list-item-avatar>
+      <v-list-item tag="div">
+        <v-list-item-icon>
           <v-icon>mdi-account</v-icon>
-        </v-list-item-avatar>
+        </v-list-item-icon>
 
         <v-list-item-content>
           <v-list-item-title> {{ user.name }} </v-list-item-title>
@@ -52,9 +49,7 @@
       >
         <v-icon> {{ item.icon }}}</v-icon>
 
-        <v-list-content>
-          <v-list-item-title> {{item.title }}</v-list-item-title>
-        </v-list-content>
+        <v-list-item-title> {{item.title }}</v-list-item-title>
       </v-list-item>
 
     </v-list>
