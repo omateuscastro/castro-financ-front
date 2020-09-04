@@ -13,6 +13,19 @@ const errorHandler = (err, vm, info) => {
   }
 }
 
+const groupBy = (array, key, makeCurrentKey) => {
+  return array.reduce((accumulated, item) => {
+    const currentKey = makeCurrentKey(item, key)
+    return {
+      ...accumulated,
+      [currentKey]: [
+        ...(accumulated[currentKey] || []),
+        item
+      ]
+    }
+  }, {})
+}
+
 const currencyFormatter = ({ locale, currency } = { locale: 'pt-BR', currency: 'BRL' }) => {
   return new Intl.NumberFormat(locale, {
     style: 'currency',
@@ -22,6 +35,7 @@ const currencyFormatter = ({ locale, currency } = { locale: 'pt-BR', currency: '
 
 export {
   currencyFormatter,
+  groupBy,
   errorHandler,
   formatError
 }
