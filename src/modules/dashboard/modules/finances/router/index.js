@@ -1,9 +1,9 @@
-const RecordsHome = () => import('./../views/RecordsHome.vue')
+const RecordsHome = () => import('./../views/RecordsHome')
 
 export default [
   {
     path: 'records',
-    components: RecordsHome,
+    component: RecordsHome,
     meta: { requiresAuth: true },
     alias: ['home', '']
   }
