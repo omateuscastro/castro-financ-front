@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1> Lançamentos </h1>
     <RecordsList />
   </div>
 </template>

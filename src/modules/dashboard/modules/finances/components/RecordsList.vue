@@ -5,6 +5,7 @@
       format="MM-YYYY"
       @month="changeMonth"
       :color="toolbarColor"
+      :month="$route.query.month"
     > </ToolbarByMonth>
     <v-card>
       <v-card-text
@@ -97,7 +98,12 @@ export default {
       return index < Object.keys(object).length - 1
     },
     changeMonth (month) {
-      console.log('month : ', month)
+      this.$router.push({
+        path: this.$route.path,
+        query: {
+          month
+        }
+      })
       this.setRecords(month)
     },
     async setRecords (month) {
