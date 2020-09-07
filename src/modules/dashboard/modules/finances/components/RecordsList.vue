@@ -4,6 +4,7 @@
       class="mb-2"
       format="MM-YYYY"
       @month="changeMonth"
+      :color="toolbarColor"
     > </ToolbarByMonth>
     <v-card>
       <v-card-text
@@ -86,6 +87,9 @@ export default {
     },
     totalAmount () {
       return this.records.reduce((sum, record) => sum + record.amount, 0)
+    },
+    toolbarColor () {
+      return this.totalAmount < 0 ? 'error' : 'primary'
     }
   },
   methods: {
