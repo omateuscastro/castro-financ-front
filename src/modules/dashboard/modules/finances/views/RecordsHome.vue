@@ -12,9 +12,6 @@ import RecordsList from './../components/RecordsList'
 export default {
   components: {
     RecordsList
-  },
-  mounted () {
-    console.log('teste')
   }
 }
 </script>
