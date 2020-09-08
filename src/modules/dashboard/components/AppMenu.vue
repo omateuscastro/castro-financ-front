@@ -47,7 +47,9 @@
         :exact="item.exact"
         @click.stop="$emit('input', false)"
       >
-        <v-icon> {{ item.icon }}}</v-icon>
+        <v-list-item-icon>
+          <v-icon>{{ item.icon }}</v-icon>
+        </v-list-item-icon>
 
         <v-list-item-title> {{item.title }}</v-list-item-title>
       </v-list-item>
@@ -67,7 +69,10 @@ export default {
   },
   data: () => ({
     items: [
-      { title: 'Home', icon: 'mdi-menu', url: '/dashboard', exact: true }
+      { title: 'Home', icon: 'mdi-view-dashboard', url: '/dashboard', exact: true },
+      { title: 'Receita', icon: 'mdi-plus', url: '/dashboard/records/add?type=credit', exact: true },
+      { title: 'Despesa', icon: 'mdi-minus', url: '/dashboard/records/add?type=debit', exact: true }
+
     ],
     mini: false,
     user: {}
