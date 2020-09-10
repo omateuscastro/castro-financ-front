@@ -45,27 +45,59 @@
                 label="Descrição"
                 prepend-icon="mdi-file-document"
                 type="text"
-                v-model="$v.record.description.$model"
+                v-model.trim="$v.record.description.$model"
               ></v-text-field>
 
               <v-text-field
+                v-show="showTagsInput"
                 name="tags"
                 label="Tags ( separadas por virgula )"
                 prepend-icon="mdi-label"
                 type="text"
-                v-model="record.tags"
+                v-model.trim="record.tags"
               ></v-text-field>
 
               <v-text-field
+                v-show="showNoteInput"
                 name="note"
                 label="Observação"
                 prepend-icon="mdi-note"
                 type="text"
-                v-model="record.note"
+                v-model.trim="record.note"
               ></v-text-field>
 
             </v-form>
+
+            <v-tooltip left>
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  icon
+                  small
+                  class="mr-3"
+                  v-on="on"
+                  @click="showTagsInput = !showTagsInput"
+                >
+                  <v-icon :color="color">mdi-label</v-icon>
+                </v-btn>
+              </template>
+              <span> Adicionar Tags </span>
+            </v-tooltip>
+
+            <v-tooltip right>
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  icon
+                  small
+                  v-on="on"
+                  @click="showNoteInput = !showNoteInput"
+                >
+                  <v-icon :color="color">mdi-note</v-icon>
+                </v-btn>
+              </template>
+              <span> Adicionar Observação </span>
+            </v-tooltip>
           </v-card-text>
+
         </v-card>
 
         <v-btn
@@ -116,7 +148,9 @@ export default {
         description: '',
         tags: '',
         note: ''
-      }
+      },
+      showTagsInput: false,
+      showNoteInput: false
     }
   },
   validations: {
