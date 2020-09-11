@@ -20,6 +20,49 @@
           <v-card-text>
             <v-form>
 
+              <v-dialog
+                ref="dateDialog"
+                v-model="showDateDialog"
+                persistent
+                lazy
+                width="290"
+                full-width
+                :return-value.sync="record.date"
+              >
+                <template v-slot:activator=" { on } ">
+                  <v-text-field
+                    name="date"
+                    label="Vencimento"
+                    prepend-icon="mdi-calendar"
+                    type="text"
+                    readonly
+                    :value="formattedDate"
+                    v-on="on"
+                  ></v-text-field>
+                </template>
+
+                <v-date-picker
+                  :color="color"
+                  locale="pt-br"
+                  scrollable
+                  v-model="dateDialogValue"
+                >
+
+                  <v-spacer></v-spacer>
+                  <v-btn
+                    text
+                    :color="color"
+                    @click="cancelDateDialog"
+                  > Cancelar </v-btn>
+                  <v-btn
+                    text
+                    :color="color"
+                    @click="$refs.dateDialog.save(dateDialogValue)"
+                  > OK </v-btn>
+                </v-date-picker>
+
+              </v-dialog>
+
               <v-select
                 name="account"
                 label="Conta"
@@ -139,6 +182,7 @@ export default {
     return {
       accounts: [],
       categories: [],
+      dateDialogValue: moment().format('YYYY-MM-DD'),
       record: {
         type: this.$route.query.type,
         amount: 0,
@@ -150,7 +194,8 @@ export default {
         note: ''
       },
       showTagsInput: false,
-      showNoteInput: false
+      showNoteInput: false,
+      showDateDialog: false
     }
   },
   validations: {
@@ -174,6 +219,9 @@ export default {
         default:
           return 'primary'
       }
+    },
+    formattedDate () {
+      return moment(this.record.date).format('DD/MM/YYYY')
     }
   },
   async created () {
@@ -190,6 +238,10 @@ export default {
   },
   methods: {
     ...mapActions(['setTitle']),
+    cancelDateDialog () {
+      this.showDateDialog = false
+      this.dateDialogValue = this.record.date
+    },
     changeTitle (recordType) {
       let title
       switch (recordType) {
